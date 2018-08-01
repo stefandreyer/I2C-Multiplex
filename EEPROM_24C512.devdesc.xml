@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--created with CoDeSys 3.0 (http://www.3s-software.com) by DeviceDescriptionBuilder (3S-Smart Software Solutions GmbH)-->
+<DeviceDescription xmlns="http://www.3s-software.com/schemas/DeviceDescription-1.0.xsd" xmlns:ts="http://www.3s-software.com/schemas/TargetSettings-0.1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Types namespace="local">
+  </Types>
+  <Strings namespace="local">
+    <Language lang="en">
+    </Language>
+  </Strings>
+<!--  <Files namespace="local">
+    <Language lang="en">
+      <File fileref="local" identifier="JoystickIcon">
+        <LocalFile>Joystick.ico</LocalFile>
+      </File>
+    </Language>
+  </Files>-->
+  <Device hideInCatalogue="false">
+    <DeviceIdentification>
+      <Type>500</Type>
+      <Id>FFFF 0020</Id>
+      <Version>1.0.1.0</Version>
+    </DeviceIdentification>
+    <DeviceInfo>
+      <Name name="local:ModelName">EEPROM_24C512</Name>
+      <Description name="local:DeviceDescription">64KiB I2C EEPROM</Description>
+      <Vendor name="local:VendorName">Stefan Dreyer</Vendor>
+      <OrderNumber>-</OrderNumber>
+<!--      <Icon name="local:JoystickIcon">Joystick.ico</Icon> -->
+    </DeviceInfo>
+    <Connector moduleType="500" interface="Raspberry.I2C" role="child" explicit="false" connectorId="1" hostpath="-1">
+      <InterfaceName name="local:PCI">I²C-Bus</InterfaceName>
+      <Slot count="1" allowEmpty="false">
+      </Slot>
+      <DriverInfo needsBusCycle="false">
+        <RequiredLib libname="Raspberry I2C MUX" vendor="Stefan Dreyer" version="1.0.1.0" identifier="deviceLib">
+          <FBInstance basename="$(DeviceName)" fbname="EEPROM_24C512">
+            <Initialize methodName="Initialize" />
+            <CyclicCall methodname="BeforeWriteOutputs" task="#buscycletask" whentocall="beforeWriteOutputs" />
+			<CyclicCall methodname="AfterReadInputs" task="#buscycletask" whentocall="afterReadInputs" />
+          </FBInstance>
+        </RequiredLib>
+      </DriverInfo>
+      <HostParameterSet>
+        <Parameter ParameterId="1" type="std:USINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>16#50</Default>
+          <Name name="local:Id393218">I²C address</Name>
+          <Description name="local:Id393218.Desc">Address of the device</Description>
+        </Parameter>
+		<Parameter ParameterId="2" type="std:BOOL">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>False</Default>
+          <Name name="local:Id393218">Is Multiplex</Name>
+          <Description name="local:Id393218.Desc">Address is used by more than one device</Description>
+        </Parameter>
+		<Parameter ParameterId="3" type="std:ARRAY[0..7] OF SINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>[0,0,0,0,0,0,0,0]</Default>
+          <Name name="local:Id393218">Stage mux channel numbers</Name>
+          <Description name="local:Id393218.Desc">write here after which channel/stage the slave is(start @ 1)</Description>
+        </Parameter>
+		<Parameter ParameterId="4" type="std:BOOL">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>False</Default>
+          <Name name="local:Id393218">Wait after fault</Name>
+          <Description name="local:Id393218.Desc">Does slave has to wait after an error?</Description>
+        </Parameter>
+		<Parameter ParameterId="5" type="std:UDINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>100</Default>
+          <Name name="local:Id393218">How long to wait</Name>
+          <Description name="local:Id393218.Desc">Count of cycles the slave has to wait bevor try again comunnication</Description>
+        </Parameter>
+		<Parameter ParameterId="6" type="std:UDINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>16#FFFFFFFF</Default>
+          <Name name="local:Id393218">Write every n ms</Name>
+          <Description name="local:Id393218.Desc">On Outputs, you can write every n ms, or on change. Set to 16#FFFFFFFF for no cycle</Description>
+        </Parameter>
+		<Parameter ParameterId="7" type="std:UDINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>16#FFFFFFFF</Default>
+          <Name name="local:Id393218">Ms between read</Name>
+          <Description name="local:Id393218.Desc">ms between a read is performed, usefull for slow sensors</Description>
+        </Parameter>
+		<Parameter ParameterId="8" type="std:BOOL">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>False</Default>
+          <Name name="local:Id393218">Debug on</Name>
+          <Description name="local:Id393218.Desc">Report device i.o. in for debug purpose</Description>
+        </Parameter>
+		<Parameter ParameterId="9" type="std:BOOL">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>False</Default>
+          <Name name="local:Id393218">can use foreign request</Name>
+          <Description name="local:Id393218.Desc">if set true an an other slave has set the same request ant time in not over, then the slave uses the foreign request</Description>
+        </Parameter>
+		<Parameter ParameterId="10" type="std:USINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>0</Default>
+          <Name name="local:Id393218">MUX_MASTER</Name>
+          <Description name="local:Id393218.Desc">Number of first Muxer/Master from 0..7</Description>
+        </Parameter>
+	  </HostParameterSet>
+    </Connector>
+  </Device>
+</DeviceDescription>
