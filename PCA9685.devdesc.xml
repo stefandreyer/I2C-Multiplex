@@ -18,7 +18,7 @@
     <DeviceIdentification>
       <Type>500</Type>
       <Id>FFFF 0010</Id>
-      <Version>1.0.1.0</Version>
+      <Version>1.0.1.1</Version>
     </DeviceIdentification>
     <DeviceInfo>
       <Name name="local:ModelName">PCA9685</Name>
@@ -32,7 +32,7 @@
       <Slot count="1" allowEmpty="false">
       </Slot>
       <DriverInfo needsBusCycle="false">
-        <RequiredLib libname="Raspberry I2C MUX" vendor="Stefan Dreyer" version="1.0.1.0" identifier="deviceLib">
+        <RequiredLib libname="Raspberry I2C MUX" vendor="Stefan Dreyer" version="1.0.1.1" identifier="deviceLib">
           <FBInstance basename="$(DeviceName)" fbname="PCA9685">
             <Initialize methodName="Initialize"/>
 			<CyclicCall methodname="BeforeWriteOutputs" task="#buscycletask" whentocall="beforeWriteOutputs" />
@@ -105,6 +105,12 @@
           <Default>50</Default>
           <Name name="local:Id393218">Frequency [Hz]</Name>
           <Description name="local:Id393218.Desc">Number of periods (HIGH-LOW-cycles) per second</Description>
+        </Parameter>
+		<Parameter ParameterId="21" type="std:UINT">
+          <Attributes channel="none" download="true" functional="false" onlineaccess="read" />
+          <Default>2#0</Default>
+          <Name name="local:Id393218">Mode</Name>
+          <Description name="local:Id393218.Desc">Value is tranfered to MODE2 register of PCA, see doku for value.If bit 5 is set, use on/off only!</Description>
         </Parameter>
       </HostParameterSet>
     </Connector>
