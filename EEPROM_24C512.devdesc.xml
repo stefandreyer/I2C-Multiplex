@@ -18,7 +18,7 @@
     <DeviceIdentification>
       <Type>500</Type>
       <Id>FFFF 0020</Id>
-      <Version>1.0.1.0</Version>
+      <Version>1.0.1.1</Version>
     </DeviceIdentification>
     <DeviceInfo>
       <Name name="local:ModelName">EEPROM_24C512</Name>
@@ -32,7 +32,7 @@
       <Slot count="1" allowEmpty="false">
       </Slot>
       <DriverInfo needsBusCycle="false">
-        <RequiredLib libname="Raspberry I2C MUX" vendor="Stefan Dreyer" version="1.0.1.0" identifier="deviceLib">
+        <RequiredLib libname="Raspberry I2C MUX" vendor="Stefan Dreyer" version="1.0.1.1" identifier="deviceLib">
           <FBInstance basename="$(DeviceName)" fbname="EEPROM_24C512">
             <Initialize methodName="Initialize" />
             <CyclicCall methodname="BeforeWriteOutputs" task="#buscycletask" whentocall="beforeWriteOutputs" />
